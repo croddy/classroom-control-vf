@@ -47,7 +47,7 @@ node default {
 
 # Manage '/etc/motd'
 exec { '/etc/motd':
-  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd"
+  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
   owner => 'root',
   group => 'root',
   mode => '0644',
