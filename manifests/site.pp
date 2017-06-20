@@ -49,7 +49,7 @@ node default {
     owner => 'root',
     group => 'root',
     mode => '0644',
-    content => 'Hey, MOTD has been edited\n Type with confendence"
+    content => "Hey, MOTD has been edited\n Type with confendence",
   }
   
 }
