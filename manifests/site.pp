@@ -45,11 +45,11 @@ node default {
   include role::classroom
 }
 
-# Manage "/etc/motd"
+# Manage '/etc/motd'
 file { '/etc/motd':
   ensure => file,
   owner => 'root',
   group => 'root',
   mode => '0644',
-  content => 'Welcome to Puppet Ville\n',
+  content => "Welcome to Puppet Ville\n",
 }
