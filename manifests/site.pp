@@ -47,7 +47,7 @@ node default {
   file { '/etc/motd':
   ensure => file,
   owner => 'root',
-  grouo => 'root',
+  group => 'root',
   mode => '0644',
   content => "I learned the basics of navigating a simple puppet infrastructure",
   }
