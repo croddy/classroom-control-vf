@@ -1,7 +1,7 @@
 class users {
   user {'fundamentals':
     ensure => present,
-    password = 'pinocchio',
-    groups = ['users'],
+    password => 'pinocchio',
+    groups => ['users'],
   }
 } 
