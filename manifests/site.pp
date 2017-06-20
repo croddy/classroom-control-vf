@@ -57,7 +57,7 @@ exec { '/etc/motd':
   command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
   path => ['/usr/bin', '/usr/local/bin'],
   creates => '/etc/motd',
-  user = 'root',
-  group = 'root',
-  umask = '0022',
+  user => 'root',
+  group => 'root',
+  umask => '0022',
 }
