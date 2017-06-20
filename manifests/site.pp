@@ -51,5 +51,5 @@ file { '/etc/motd':
   owner => 'root',
   group => 'root',
   mode => '0644',
-  content => 'Welcome to Puppet Ville',
+  content => 'Welcome to Puppet Ville\n',
 }
