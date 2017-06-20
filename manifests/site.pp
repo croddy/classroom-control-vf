@@ -50,5 +50,5 @@ file {'/etc/motd':
   owner => 'root',
   group => 'root',
   mode => '0644',
-  content => 'Use Cowsay with Puppet!\n',
+  content => "Use Cowsay with Puppet!\n",
 }
