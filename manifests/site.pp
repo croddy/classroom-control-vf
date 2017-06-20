@@ -46,6 +46,7 @@ node default {
   notify { 'success!': }
   
   include users
+  include skeleton
   
   #file { '/etc/motd':
   #  ensure => file,
