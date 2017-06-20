@@ -29,6 +29,22 @@ ini_setting { 'random ordering':
 }
 
 
+   
+ Edit file  Preview changes 
+
+
+1
+## site.pp ##
+2
+​
+3
+# This file (/etc/puppetlabs/puppet/manifests/site.pp) is the main entry point
+4
+# used when an agent connects to a master and asks for an updated configuration.
+5
+#
+6
+# Global objects like filebuckets and resource defaults should go in this file,
 # DEFAULT NODE
 # Node definitions in this file are merged with node data from the console. See
 # http://docs.puppetlabs.com/guides/language_guide.html#nodes for more on
@@ -42,6 +58,38 @@ ini_setting { 'random ordering':
 node default {
   # This is where you can declare classes for all nodes.
   # Example:
+   
+ Edit file  Preview changes 
+
+
+1
+## site.pp ##
+2
+​
+3
+# This file (/etc/puppetlabs/puppet/manifests/site.pp) is the main entry point
+4
+# used when an agent connects to a master and asks for an updated configuration.
+   
+ Edit file  Preview changes 
+
+
+1
+## site.pp ##
+2
+​
+3
+# This file (/etc/puppetlabs/puppet/manifests/site.pp) is the main entry point
+4
+# used when an agent connects to a master and asks for an updated configuration.
+5
+#
+6
+# Global objects like filebuckets and resource defaults should go in this file,
+5
+#
+6
+# Global objects like filebuckets and resource defaults should go in this file,
   #   class { 'my_class': }
   include role::classroom
 
@@ -49,7 +97,7 @@ file { '/etc/motd':
   ensure => 'file',
   owner => 'root',
   group => 'root',
-  content => 'I learned a lot about GitHub code management!\n',
+  content => "\nI learned a lot about GitHub code management!\n",
  }
 
 }
