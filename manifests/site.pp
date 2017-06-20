@@ -1,3 +1,4 @@
+
 ## site.pp ##
 
 # This file (/etc/puppetlabs/puppet/manifests/site.pp) is the main entry point
@@ -44,12 +45,16 @@ node default {
   #   class { 'my_class': }
   include role::classroom
   
-  file {'/etc/motd':
-  ensure => file,
-  owner => 'root',
-  group => 'root',
-  mode => '0644',
-  content => "What's a puppet?\n",
-  }
+  #file {'/etc/motd':
+  #ensure => file,
+  #owner => 'root',
+  #group => 'root',
+  #mode => '0644',
+  #content => "What's a puppet?\n",
+  #}
   
+  exec{"cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
+  path => '/usr/bin:usr/localbin',
+  creates => '/etc/motd',
+  }
 }
