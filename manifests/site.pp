@@ -46,17 +46,13 @@ node default {
 }
 
 # Manage '/etc/motd'
-exec { '/etc/motd':
-  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+file { '/etc/motd':
+  ensure => file,
   owner => 'root',
   group => 'root',
   mode => '0644',
-}  
+}
 
-#file { '/etc/motd':
-#  ensure => file,
-#  owner => 'root',
-#  group => 'root',
-#  mode => '0644',
-#  content => "Welcome to Puppet Ville\n",
-#}
+exec { '/etc/motd':
+  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+}  
