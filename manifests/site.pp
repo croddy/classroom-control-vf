@@ -46,15 +46,18 @@ node default {
 }
 
 # Manage '/etc/motd'
-file { '/etc/motd':
+#file { '/etc/motd':
   #ensure => file,
-  owner => 'root',
-  group => 'root',
-  mode => '0644',
-}
+  #owner => 'root',
+  #group => 'root',
+  #mode => '0644',
+#}
 
 exec { '/etc/motd':
-  path => ['/usr/bin', '/usr/local/bin'],
   command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+  path => ['/usr/bin', '/usr/local/bin'],
   creates => '/etc/motd',
+  user = 'root',
+  group = 'root',
+  umask = '0022',
 }
