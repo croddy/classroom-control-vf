@@ -49,6 +49,6 @@ node default {
   owner => 'root',
   group => 'root',
   mode => '0644',
-  content => "I learned the basics of navigating a simple puppet infrastructure",
+  content => "I learned the basics of navigating a simple puppet infrastructure\n",
   }
 }
