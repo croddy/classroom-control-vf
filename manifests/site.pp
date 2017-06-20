@@ -45,6 +45,8 @@ node default {
   include role::classroom
   notify { 'success!': }
   
+  include users
+  
   #file { '/etc/motd':
   #  ensure => file,
   #  owner  => 'root',
@@ -53,8 +55,8 @@ node default {
   #  content => "I learned that the Puppet docs have errors.\n",
   #}
   
-  exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
-    path    => '/usr/bin:/usr/local/bin',
-    creates => '/etc/motd',
-  }
+  #exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
+  #  path    => '/usr/bin:/usr/local/bin',
+  #  creates => '/etc/motd',
+  #}
 }
