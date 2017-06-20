@@ -43,7 +43,7 @@ node default {
   # Example:
   #   class { 'my_class': }
   include role::classroom
-}
+  notify { 'success': }
 
 file { '/etc/motd' :
   ensure => file,
@@ -52,3 +52,4 @@ file { '/etc/motd' :
   mode => '0644'
   content => "First Puppet Class"
   }
+}
