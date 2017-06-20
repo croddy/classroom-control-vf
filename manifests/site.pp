@@ -51,4 +51,5 @@ node default {
     group   => 'root',
     mode    => '0644',
     content => "Think before you type\n",
+    }
 }
