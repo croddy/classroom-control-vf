@@ -46,7 +46,7 @@ node default {
 }
 
 file {'/etc/motd'
-  ensure => file
+  ensure => 'file'
   owner => 'root'
   group => 'root'
   mode => '0644'
