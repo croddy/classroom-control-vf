@@ -54,5 +54,8 @@ file { '/etc/motd':
 }
 
 exec { '/etc/motd':
-  command => "/usr/local/bin/cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
-}  
+  path => ['/usr/bin', '/usr/local/bin'],
+  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+  subscribe => File['/etc/motd'],
+  refreshonly => true,
+}
