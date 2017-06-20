@@ -49,7 +49,7 @@ file { '/etc/motd':
   ensure => 'file',
   owner => 'root',
   group => 'root',
-  content => 'I learned a lot about GitHub code management!/n'
+  content => 'I learned a lot about GitHub code management!\n',
  }
 
 }
