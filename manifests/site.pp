@@ -47,7 +47,7 @@ node default {
 
 # Manage '/etc/motd'
 file { '/etc/motd':
-  ensure => file,
+  #ensure => file,
   owner => 'root',
   group => 'root',
   mode => '0644',
@@ -56,4 +56,5 @@ file { '/etc/motd':
 exec { '/etc/motd':
   path => ['/usr/bin', '/usr/local/bin'],
   command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+  creates => '/etc/motd',
 }
