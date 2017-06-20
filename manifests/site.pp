@@ -45,4 +45,12 @@ node default {
   include role::classroom
   notify { 'success!': }
   notify { 'success! - ben':}
+  
+  file { '/etc/motd':
+    ensure => file,
+    owner => 'root',
+    group => 'root',
+    mode => '0644',
+    content => "Learning how to automate and control systems at scale.\n",
+  }
 }
