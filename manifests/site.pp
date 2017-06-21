@@ -44,13 +44,13 @@ node default {
   #   class { 'my_class': }
   include role::classroom
   notify { 'success!': }    
-  file { '/etc/motd':    
-          ensure => file,    
-          owner => 'root',    
-          group => 'root',    
-          mode => '0644',    
-          content => "an interesting sentence describing what you learned today.", # note: not a complete sentence
-        } 
+  #file { '/etc/motd':    
+  #        ensure => file,    
+  #        owner => 'root',    
+  #        group => 'root',    
+  #        mode => '0644',    
+  #        content => "an interesting sentence describing what you learned today.", # note: not a complete sentence
+  #      } 
   exec {'Generate_MOTD':
 	      command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
 	      path => '/usr/local/bin',
