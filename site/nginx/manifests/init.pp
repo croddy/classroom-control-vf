@@ -13,7 +13,6 @@ class nginx {
       $package = 'nginx-service'
       $owner = 'Administrator'
       $group = 'Administrators'
-      $user = 'nginx
       $docroot = 'C:\ProgramData\nginx\html'
       $confdir = 'C:\ProgramData\nsginx'
       $logdir = 'C:\ProgramData\nginx\logs'
@@ -50,16 +49,16 @@ class nginx {
         confdir => $confidir,
         logdir => $logdir,
       }],
-    require => Package['nginx'],
-    notify => Service['nginx'],
+    require => Package[$package],
+    notify => Service[$service_name],
   }
   file { "${confdir}/conf.d/default.conf":
     content => epp('nginx/default.conf.epp',
       {
         docroot => $docroot,
       }],
-    require => Package['nginx'],
-    notify => Service['nginx'],
+    require => Package[$package],
+    notify => Service[$service_name],
   }
   service { $service_name:
     ensure => running,
