@@ -1,5 +1,7 @@
 
 
+
+
 #
 # site.pp ##
 
@@ -42,3 +44,9 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 include memcached
+
+if $::virtual != 'physical' {
+$vmname = capitalize($::virtual)
+notify { "This is a ${vmname} virtual machine.": }
+}
+}
