@@ -8,7 +8,7 @@ class {
     source => 'puppet:///module/nginx/nginx.conf',
   }
   
-  file { '/etc/nginx/config.d/default.conf'}
+  file { '/etc/nginx/config.d/default.conf'
     ensure => file,
     source => 'puppet:///module/nginx/default.conf',
   }
@@ -20,7 +20,7 @@ class {
   
   service { 'nginx',
     esure => running,
-    enable => true,
+    enabled => true,
   }
   
   
