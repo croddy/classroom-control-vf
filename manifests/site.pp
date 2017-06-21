@@ -39,6 +39,6 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 if $::is_virtual { 
-  $vmname = capitailize($::is_virtual)
+  $vmname = capitalize($::is_virtual)
   notify { "This is a ${vmname} system.":}
 }
