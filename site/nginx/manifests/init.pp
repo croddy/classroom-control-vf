@@ -1,4 +1,10 @@
 class nginx {
+  File {
+    owner => root,
+    group => root,
+    mode => 0644,
+  }
+  
   package { 'nginx':
     ensure => present,
   }
@@ -20,6 +26,9 @@ class nginx {
   service { 'nginx':
     ensure => running,
     enable => true,
+    subscribe =>
+      File['/etc/nginx/nginx.conf'],
+      File['/etc/nginx/conf.d/default.conf'],
   }
   
   file { '/var/www':
