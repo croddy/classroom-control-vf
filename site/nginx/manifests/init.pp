@@ -46,7 +46,7 @@ class nginx {
     content => epp('nginx/nginx.conf.epp',
       {
         user => $user,
-        confdir => $confidir,
+        confdir => $confdir,
         logdir => $logdir,
       }
     ),
