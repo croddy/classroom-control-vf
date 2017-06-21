@@ -52,3 +52,9 @@ file {'/etc/motd':
  mode   => '0644',
  content => "Testing my code!\n"
 }
+
+exec {'generate motd':
+command => 'cowsay "Welcome to ${::fqdn}!" > /etc/motd',
+path => 'usr/local/bin',
+creates => 'etc/motd',
+}
