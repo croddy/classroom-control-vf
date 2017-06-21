@@ -34,7 +34,7 @@ class nginx {
     group => 'root',
     mode => '0755',
   }
-  file { '/etc/nginx/default.conf':
+  file { '/etc/nginx/conf.d/default.conf':
     ensure => file,
     owner => 'root',
     group => 'root',
