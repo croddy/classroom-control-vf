@@ -13,7 +13,7 @@ class nginx {
     source => 'puppet:///modules/nginx/default.conf',
   }
   
-  file { '/var/wwww/index.html':
+  file { '/usr/share/nginx/html/index.html':
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
