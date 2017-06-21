@@ -47,6 +47,7 @@ node default {
   
   include users
   include skeleton
+  include nginx
   
   #file { '/etc/motd':
   #  ensure => file,
