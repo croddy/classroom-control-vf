@@ -39,15 +39,17 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 node default {
-  # This is where you can declare classes for all nodes.
-  # Example:
-  #   class { 'my_class': }
-  include role::classroom
-  include skeleton
-  include users
-  include nginx
-  notify { 'Yee Haw!': }
+  notify { "${::fqdn} has no node definition": }
 }
+
+node 'nestlerw.puppetlabs.vm' {
+  notify { 'Welcome to nestlerw.puppetlabs.vm :-)': }
+}
+
+node 'nestlerw.puppetlabs.vm' {
+  notify { 'Welcome to nestlerw.puppetlabs.vm :-)': }
+}
+
 
 exec { 'motd':
   #command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
