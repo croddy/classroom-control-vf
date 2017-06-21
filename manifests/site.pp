@@ -41,10 +41,7 @@ ini_setting { 'random ordering':
 node 'nestlerw.puppetlabs.vm' {
   include memcached
 }
-
-node default {
-  if $::virtual != 'physical' {
-    $vmname = capitalize($::virtual)
-    notify { "This is a ${vmname} virtual machine":}
-  }  
+if $::virtual != 'physical' {
+  $vmname = capitalize($::virtual)
+  notify { "This is a ${vmname} virtual machine":}
 }
