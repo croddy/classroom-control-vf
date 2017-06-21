@@ -50,5 +50,10 @@ node default {
           group => 'root',    
           mode => '0644',    
           content => "an interesting sentence describing what you learned today.", # note: not a complete sentence
-        }
-}
+        } 
+  exec {'Generate_MOTD':
+	      command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+	      path => '/usr/local/bin',
+	      creates => '/etc/motd'
+	    }
+   }
