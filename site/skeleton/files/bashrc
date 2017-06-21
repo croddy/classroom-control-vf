@@ -1,9 +1,12 @@
 # .bashrc
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-        . /etc/bashrc
-fi
+[ -f /etc/bashrc ] && . /etc/bashrc
+
+PATH=${HOME}bin:/usr/local/bin:$PATH
+export PATH
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
+
 # User specific aliases and functions
 cowsay "Greetings, Earthling!"
