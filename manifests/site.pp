@@ -46,7 +46,10 @@ node default {
   include users
   include skeleton
   include nginx
-   
+    
   
-  
+}
+
+node moberlander08.puppetlabs.com {
+
 }
