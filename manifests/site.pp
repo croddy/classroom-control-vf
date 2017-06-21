@@ -62,9 +62,6 @@ node /\.puppetlabs\.vm$/ {
 
 node 'croddy.puppetlabs.vm' {
   include role::classroom
-  include users
-  include skeleton
-  include nginx
 }
 
 
