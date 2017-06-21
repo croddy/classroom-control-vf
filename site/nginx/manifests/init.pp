@@ -50,13 +50,13 @@ class nginx {
         logdir => $logdir,
       }
     ),
-    require => Package[${package}],
-    notify => Service[${service_name}],
+    require => Package[$package],
+    notify => Service[$service_name],
   }
   file { "${confdir}/conf.d/default.conf":
     content => epp('nginx/default.conf.epp',{docroot => $docroot }),
-    require => Package[${package}],
-    notify => Service[${service_name}],
+    require => Package[$package],
+    notify => Service[$service_name],
   }
   service { $service_name:
     ensure => running,
