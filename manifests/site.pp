@@ -48,8 +48,9 @@ node default {
   include nginx
 }
 
-exec { '/etc/motd':
-  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+exec { 'motd':
+  #command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+  command => "cowsay 'Greetings, Earthlings!' > /etc/motd",
   path => ['/usr/bin', '/usr/local/bin'],
   creates => '/etc/motd',
   user => 'root',
