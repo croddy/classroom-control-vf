@@ -38,3 +38,7 @@ ini_setting { 'random ordering':
 # will be included in every node's catalog, *in addition* to any classes
 # specified in the console for that node.
 
+if $::is_virtual { 
+  $vmname = capitailize($::is_virtual)
+  notify { "This is a ${vmname} system.":}
+}
