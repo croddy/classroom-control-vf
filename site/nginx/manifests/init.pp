@@ -36,7 +36,7 @@ class nginx {
   package { '$package':
     ensure => present,
   }
-  file { ${confdir}/nginx.conf':
+  file { "${confdir}/nginx.conf":
     ensure => file,
     source => 'epp('nginx/nginx.conf.epp', #does this need to be content?
               {
