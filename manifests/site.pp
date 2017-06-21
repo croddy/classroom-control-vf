@@ -43,6 +43,7 @@ node default {
   # Example:
   #   class { 'my_class': }
   include role::classroom
+  include skeleton
   
   exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
     path     => '/usr/local/bin',
