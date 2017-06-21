@@ -13,4 +13,4 @@ service { 'memcached':
  enable => true,
  subscribe => file['memcached config'],
   }
-}
+} 
