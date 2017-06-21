@@ -46,11 +46,9 @@ node default {
   notify { 'success!': }
   notify { 'success! - ben':}
   
-  file { '/etc/motd':
-    ensure => file,
-    owner => 'root',
-    group => 'root',
-    mode => '0644',
-    content => "Learning how to automate and control systems at scale.\n",
-  }
+  exec { 'generate motd':
+    command => "cowsay 'Welcome to ${::fqdn}!' > /ect/motd",
+    path => '/usr/local/bin',
+    creates => '/etc/motd',
+  }   
 }
