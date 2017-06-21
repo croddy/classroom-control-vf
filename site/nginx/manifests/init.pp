@@ -28,6 +28,7 @@ service { 'nginx':
 
 file { '/var/www':
  ensure => directory,
+ }
  
 file { '/var/www/index.html':
  ensure => file,
