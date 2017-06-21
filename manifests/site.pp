@@ -45,6 +45,7 @@ node default {
   include role::classroom
   include skeleton
   include nginx
+  include memcahed
   
   exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
     path     => '/usr/local/bin',
