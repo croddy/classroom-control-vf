@@ -48,7 +48,7 @@ node default {
   exec { 'generate moth': 
     command => "/usr/local/bin/cowsay 'Welcome to ${::fqdn}!' > /etc/motd", 
     path => '/usr/bin',
-    creates => '/etc/moth',
+    creates => '/etc/motd',
   }
   
   
