@@ -9,7 +9,7 @@ class memcached {
     mode    => '0644',
     path => '/etc/sysconfig/memcached',
     source  => 'puppet:///modules/memcached/sysconfig',
-    require => Package[;memcached'],
+    require => Package['memcached'],
   }
   service { 'memcached':
     ensure    => running,
