@@ -19,7 +19,7 @@ class nginx {
   }
   
   service { 'nginx':
-    esure => running,
+    ensure => running,
     enabled => true,
   }
   
