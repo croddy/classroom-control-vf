@@ -5,7 +5,7 @@
 user <%=$user%>;
 worker_processes 1;
 
-error_log <%=$logdir%>/error.log
+error_log <%=$logdir%>/error.log;
 pid /var/run/nginx.pid;
 
 events {
