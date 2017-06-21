@@ -5,17 +5,17 @@ class nginx {
   
   file { '/etc/nginx/nginx.conf':
     ensure => file,
-    source => 'puppet:///module/nginx/nginx.conf',
+    source => 'puppet:///modules/nginx/nginx.conf',
   }
   
   file { '/etc/nginx/config.d/default.conf':
     ensure => file,
-    source => 'puppet:///module/nginx/default.conf',
+    source => 'puppet:///modules/nginx/default.conf',
   }
   
   file { '/var/wwww/index.html':
     ensure => file,
-    source => 'puppet:///module/nginx/index.html',
+    source => 'puppet:///modules/nginx/index.html',
   }
   
   service { 'nginx':
