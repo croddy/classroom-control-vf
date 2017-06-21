@@ -45,10 +45,8 @@ node default {
   include role::classroom
 }
 
-file {'/etc/motd':
-  ensure => file,
-  owner => 'root',
-  group => 'root',
-  mode => '0644',
-  content => "Use Cowsay with Puppet!\n",
+exec {'generate motd':
+  command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
+  path => "/usr/local/bin/cowsay",
+  creates => "/etc/motd",
 }
