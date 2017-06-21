@@ -41,4 +41,8 @@ class nginx {
     mode => '0644',
     source => 'puppet:///modules/nginx/default.conf',
   }
- 
+  service { 'nginx':
+    ensure => running,
+    enable => true,
+  }
+}
