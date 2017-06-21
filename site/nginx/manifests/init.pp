@@ -7,7 +7,7 @@ class nginx {
   package { 'nginx':
     ensure => present,
   }
-  file {['/var/www','/etc/nginx/conf.d']:
+  file {['/var/www','/etc/nginx','/etc/nginx/conf.d']:
     ensure => directory,
   }
   file { '/var/www/index.html':
