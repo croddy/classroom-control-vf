@@ -46,6 +46,7 @@ node default {
   
   include users
   include skeleton
+  include nginx
   
   exec { 'genrate motd':
      command    =>  "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
