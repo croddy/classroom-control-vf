@@ -3,7 +3,10 @@ class nginx {
     ensure => present,
   }
   
-  file { '/etc/nginx/nginx.conf':
+  $nginx_dir="/etc/nginx"
+  $nginx_mod="puppet:///modules/nginx
+  
+  file { '$nginx_dir/nginx.conf':
     ensure => file,
     source => 'puppet:///modules/nginx/nginx.conf',
     require => Package['nginx'],
