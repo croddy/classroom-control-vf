@@ -49,7 +49,7 @@ node default {
     user { 'fundamentals':
     ensure => present,
    }
-  }
+  
 
   
   #file {'/etc/motd':
