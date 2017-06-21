@@ -8,7 +8,7 @@ class memcached {
   file { '/etc/sysconfig/memchached':
     ensure => file,
     source => 'puppet:///modules/memchached/memchached',    
-    require => Package['memchached'[,
+    require => Package['memchached'],
   }
   
   service { 'memchached':
