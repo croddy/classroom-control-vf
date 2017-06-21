@@ -45,8 +45,8 @@ node default {
   #include role::classroom
   #notify { "Hello, my name is ${::hostname}": }
     
-  include users
-  include skeleton
-  include nginx
+  #include users
+  #include skeleton
+  #include nginx
    
 }
