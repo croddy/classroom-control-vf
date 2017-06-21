@@ -45,8 +45,8 @@ node default {
   include role::classroom
   
   exec { 'genrate motd':
-     command    =>  "cowsay "Welcome to ${::fqdn}!" > /etc/motd":
+     command    =>  "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
      path   => '/usr/local/bin',
-     creates  => '/etc/motd'
+     creates  => '/etc/motd',
      }
 }
