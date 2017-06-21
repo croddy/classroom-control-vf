@@ -41,13 +41,3 @@ ini_setting { 'random ordering':
 node default {
   notify { "${::fqdn} has no node definition": }
 }
-
-exec { 'motd':
-  #command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
-  command => "cowsay 'Greetings, Earthlings!' > /etc/motd",
-  path => ['/usr/bin', '/usr/local/bin'],
-  creates => '/etc/motd',
-  user => 'root',
-  group => 'root',
-  umask => '0022',
-}
