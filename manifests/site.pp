@@ -37,27 +37,3 @@ ini_setting { 'random ordering':
 # definition. If there are no other nodes in this file, classes declared here
 # will be included in every node's catalog, *in addition* to any classes
 # specified in the console for that node.
-
-node default {
-  # This is where you can declare classes for all nodes.
-  # Example:
-  #   class { 'my_class': }
-  include role::classroom
-  include users
-  include skeleton
-  include nginx
-  
-  # file { '/etc/motd':
-    # ensure => file,
-    # owner => 'root',
-    # group => 'root',
-    # mode => '0644',
-    # content => "I learned the basics of navigating a simple puppet infrastructure\n",
-  #}
-  
-  exec { 'generate /etc/motd':
-    command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
-    path => '/usr/local/bin',
-    creates => '/etc/motd',
-  }
-}
