@@ -1,4 +1,4 @@
-class aliases ( $admin = 'mail' )
+class aliases ( $admin = 'bill@learningtreelabs.com' )
 {
     # uses $admin to build the aliases file
     file { '/etc/aliases':
