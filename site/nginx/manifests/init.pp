@@ -50,7 +50,7 @@ class nginx {
         logdir => $logdir,
       }
     )
-    require => Package['$package"],
+    require => Package['$package'],
     notify => Service['$service_name'],
   }
   file { "${confdir}/conf.d/default.conf":
