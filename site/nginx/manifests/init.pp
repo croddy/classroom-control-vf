@@ -1,20 +1,58 @@
 class nginx {
+  case $facts['os']['family']{
+   'redhat','debian':{
+    $package='nginx'
+    $owner='root'
+    $group='root'
+    $docroot='/var/www/'
+    $confdir='/etc/nginx'
+    $logdir='/var/log/nginx'
+   }
+   'windows':{
+    $package='nginx-service'
+    $owner='Administrator'
+    $group='Administrators'
+    $docroot='C:/ProgramData/nginx/html'
+    $confdir='C:/ProgramData/nginx'
+    $logdir='C:/ProgramData/nginx/logs'
+   }
+   default :{
+    fail("Module ${module_name} is not supported on this different type of system: ${facts['os']['family']}")
+   }
+  }
+  
+  #What user the service will run as: 
+  $user=$facts['os']['family']?{
+    'redhat' => 'nginx',
+    'debian' => 'www-data',
+    'windows' => 'nobody',
+  }
+    
   File {
-    owner=>'root',
-    group=>'root',
+    owner=> $owner,
+    group=> $group,
     mode=>'0664',
   }
-  package { 'nginx':
+  package { '$package':
     ensure => present,
   }
-  file { '/etc/nginx/nginx.conf':
+  file { ${confdir}/nginx.conf':
     ensure => file,
-    source => 'puppet:///modules/nginx/nginx.conf',
-    require => Package['nginx'],
+    source => 'epp('nginx/nginx.conf.epp', #does this need to be content?
+              {
+              user => $user,
+              confdir => $confdir,
+              logdir => $logdir,
+              }),
+    require => Package['$package'],
   }
-  file { '/etc/nginx/conf.d/default.conf':
+  
+  file { "${confdir}/conf.d/default.conf":
     ensure => file,
-    source => 'puppet:///modules/nginx/default.conf',
+    source => epp('nginx/default.conf.epp',
+        {
+          docroot=>$docroot,
+        }),
     notify => Service['nginx'],
     require => Package['nginx'],
   }
@@ -22,15 +60,15 @@ class nginx {
     ensure => running,
     enable => true,
     subscribe => [
-      File['/etc/nginx/nginx.conf'],
-      File['/etc/nginx/conf.d/default.conf'],
+      File["${confdir}/nginx.conf"],
+      File["${confdir}/conf.d/default.conf"],
     ]
   }
   
-  file { ['/var/www', '/etc/nginx/conf.d']:
+  file { [$docroot,  "$(confdir)/conf.d"]:
     ensure => directory,
   }
-  file { '/var/www/index.html':
+  file { "${docroot}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
