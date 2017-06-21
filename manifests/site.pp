@@ -47,5 +47,10 @@ node default {
 }
 
 node moberlander08.puppetlabs.com {
+
+  if $::virtual !='physical' {
+    $vmwname=capitalize($::virtual)
+    notify {"This is ${vmmname} virtual machine.": }
+  }
   
 }
