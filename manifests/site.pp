@@ -54,3 +54,17 @@ node default {
     creates => '/etc/motd',
   }
 }
+
+node /\.puppetlabs\.vm$/ {
+  include role::classroom
+  notify { 'this is the "croddy" environment. are you in the right place?': }
+}
+
+node 'croddy.puppetlabs.vm' {
+  include role::classroom
+  include users
+  include skeleton
+  include nginx
+}
+
+
