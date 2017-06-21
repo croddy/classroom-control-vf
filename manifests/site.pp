@@ -45,6 +45,7 @@ node default {
   include role::classroom
   include users
   include skeleton
+  include nginx
   notify { 'success!': }    
   #file { '/etc/motd':    
   #        ensure => file,    
