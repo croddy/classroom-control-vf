@@ -46,5 +46,9 @@ node default {
   notify { "Hello, my name is ${::hostname}": }
     
   # Lab 8.2
-  include users   
+  include users
+  
+  # Lab 8.3
+  include skeleton
+  
 }
