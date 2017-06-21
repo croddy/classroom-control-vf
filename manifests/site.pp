@@ -45,6 +45,11 @@ node default {
   include role::classroom
   
   
-  exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd"  
+  exec { 'generate moth': 
+    command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd", 
+    path => '/usr/bin',
+    creates => '/etc/moth',
+  }
+  
   
 }
