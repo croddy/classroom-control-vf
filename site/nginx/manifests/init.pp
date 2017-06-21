@@ -48,7 +48,8 @@ class nginx {
         user => $user,
         confdir => $confidir,
         logdir => $logdir,
-      }],
+      }
+    )
     require => Package[$package],
     notify => Service[$service_name],
   }
@@ -56,7 +57,8 @@ class nginx {
     content => epp('nginx/default.conf.epp',
       {
         docroot => $docroot,
-      }],
+      }
+    )
     require => Package[$package],
     notify => Service[$service_name],
   }
