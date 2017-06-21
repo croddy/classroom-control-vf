@@ -44,7 +44,6 @@ node default {
   #   class { 'my_class': }
   include role::classroom
   include users
-  include skeleton
   include nginx
   notify { 'success!':}
 }
