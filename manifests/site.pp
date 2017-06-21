@@ -46,7 +46,7 @@ node 'nestlerw.puppetlabs.vm' {
   notify { 'Welcome to nestlerw.puppetlabs.vm :-)': }
 }
 
-node 'nestlerw.puppetlabs.vm' {
+node '[a-z]+.puppetlabs.vm' {
   notify { 'Welcome to nestlerw.puppetlabs.vm :-)': }
 }
 
