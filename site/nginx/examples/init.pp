@@ -1,1 +1,1 @@
-include ngnix
+include nginx
