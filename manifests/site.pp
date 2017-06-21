@@ -45,14 +45,7 @@ node default {
   #   class { 'my_class': }
   include role::classroom
   
-  class users {
-    user { 'fundamentals':
-    ensure => present,
-   }
-  
-
-  
-  #file {'/etc/motd':
+   #file {'/etc/motd':
   #ensure => file,
   #owner => 'root',
   #group => 'root',
@@ -64,4 +57,14 @@ node default {
    # path => '/usr/bin:/usr/local/bin',
     #creates => '/etc/motd',
   #}
+  
+  class users {
+
+  user { 'fundamentals':
+
+  ensure => present,
+
+  }
+  
+  
 }
