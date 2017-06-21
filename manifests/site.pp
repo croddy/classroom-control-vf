@@ -45,7 +45,7 @@ node default {
   include role::classroom
   include skeleton
   include users
-  include ngnix
+  include nginx
 }
 
 # Manage '/etc/motd'
