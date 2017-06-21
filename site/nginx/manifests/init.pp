@@ -9,7 +9,7 @@ class nginx {
    mode => '0775',
  }
  file {'/var/www/index.html':
-   ensure => file
+   ensure => file,
    owner => 'root',
    group => 'root',
    mode => '0644',
