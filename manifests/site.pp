@@ -43,13 +43,8 @@ node default {
   # Example:
   #   class { 'my_class': }
   include role::classroom
-  
-  
-  exec { 'generate moth': 
-    command => "/usr/local/bin/cowsay 'Welcome to ${::fqdn}!' > /etc/motd", 
-    path => '/usr/bin',
-    creates => '/etc/motd',
-  }
+  include users
+   
   
   
 }
