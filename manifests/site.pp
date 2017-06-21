@@ -42,15 +42,6 @@ node default {
   notify { "${::fqdn} has no node definition": }
 }
 
-node 'nestlerw.puppetlabs.vm' {
-  notify { "Hello, Bill. Welcome to nestlerw.puppetlabs.vm :-)": }
-}
-
-node /^[a-z]+.puppetlabs\.vm$/ {
-  notify { "Hello ${::fqdn}. Welcome to nestlerw.puppetlabs.vm :-)": }
-}
-
-
 exec { 'motd':
   #command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
   command => "cowsay 'Greetings, Earthlings!' > /etc/motd",
