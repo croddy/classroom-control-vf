@@ -1,4 +1,4 @@
-class aliases ( $admin = 'fundamentals',)
+class aliases ( $admin = 'mail' )
 {
     # uses $admin to build the aliases file
     file { '/etc/aliases':
