@@ -3,7 +3,7 @@ class nginx {
     ensure => present,
   }
   
-  $nginx_dir="/etc/nginx"
+  $nginx_dir=/etc/nginx
   $nginx_mod="puppet:///modules/nginx
   
   file { '$nginx_dir/nginx.conf':
