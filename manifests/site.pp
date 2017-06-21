@@ -48,14 +48,6 @@ node default {
   include nginx
 }
 
-# Manage '/etc/motd'
-#file { '/etc/motd':
-  #ensure => file,
-  #owner => 'root',
-  #group => 'root',
-  #mode => '0644',
-#}
-
 exec { '/etc/motd':
   command => "cowsay 'Welcome to ${::fqdn}!' > /etc/motd",
   path => ['/usr/bin', '/usr/local/bin'],
