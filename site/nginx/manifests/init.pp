@@ -1,8 +1,8 @@
 class nginx {
   File {
-    owner => root,
-    group => root,
-    mode => 0644,
+    owner => 'root',
+    group => 'root',
+    mode => '0664',
   }
   
   package { 'nginx':
@@ -26,9 +26,6 @@ class nginx {
   service { 'nginx':
     ensure => running,
     enable => true,
-    subscribe =>
-      File['/etc/nginx/nginx.conf'],
-      File['/etc/nginx/conf.d/default.conf'],
   }
   
   file { '/var/www':
