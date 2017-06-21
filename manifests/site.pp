@@ -47,8 +47,8 @@ node default {
 
 file {'/etc/motd':
  ensure =>  file,
- owner  => 'root'
- group => 'root'
- mode   => '0644'
- content => 'use Cowsey with Puppet!\n'
+ owner  => 'root',
+ group => 'root',
+ mode   => '0644',
+ content => "Testing my code!\n"
 }
