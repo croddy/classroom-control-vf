@@ -47,5 +47,5 @@ node default {
 }
 
 node moberlander08.puppetlabs.com {
-  include memchached
+  include memchache
 }
