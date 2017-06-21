@@ -47,8 +47,5 @@ node default {
     
   # Lab 8.2
   include users
-  
-  # Lab 8.3
-  include skeleton
-  
+   
 }
