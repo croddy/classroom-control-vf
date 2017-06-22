@@ -18,7 +18,9 @@ class profile::blog_server {
     },
   }
   
-  include apache
+  class { 'apache':
+    docroot => '/opt/wordpress',
+  }
   
   class { 'wordpress':
     create_db_user => false,
