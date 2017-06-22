@@ -1,51 +1,23 @@
 class nginx (
-  $root = undef,
-) {
-  case $osfamily {
-    'redhat': {
-      $package = 'nginx'
-      $owner = 'root'
-      $group = 'root'
-      $docroot = '/var/www'
-      $confdir = '/etc/nginx'
-      $blockdir = '/etc/nginx/conf.d'
-      $logdir = '/var/log/nginx'
-      $service = 'nginx'
-      $user = 'nginx'
-    }
-    'debian': {
-      $package = 'nginx'
-      $owner = 'root'
-      $group = 'root'
-      $docroot = '/var/www'
-      $confdir = '/etc/nginx'
-      $blockdir = '/etc/nginx/conf.d'
-      $logdir = '/var/log/nginx'
-      $service = 'nginx'
-      $user = 'www-data'
-    }
-    'windows': {
-      $package = 'nginx-service'
-      $owner = 'Administrator'
-      $group = 'Administrators'
-      $docroot = 'C:/ProgramData/nginx/html'
-      $confdir = 'C:/ProgramData/nginx'
-      $blockdir = 'C:/ProgramData/nginx/conf.d'
-      $logdir = 'C:/ProgramData/nginx/logs'
-      $service = 'nginx'
-      $user = 'nobody'
-    }
-    default: { fail("Unsupported platform: ${::osfamily}") }
-  }
-  $real_docroot = pick($root, $docroot)
+  $package = $nginx::params::package,
+  $owner = $nginx::params::owner,
+  $group = $nginx::params::group,
+  $docroot = $nginx::params::docroot,
+  $confdir = $nginx::params::confdir,
+  $blockdir = $nginx::params::blockdir,
+  $logdir = $nginx::params::logdir,
+  $service = $nginx::params::service,
+  $user = $nginx::params::user,
+) inherits nginx::params {
   
   $template_params = {
-    docroot => $real_docroot,
+    docroot => $docroot,
     confdir => $confdir,
     blockdir => $blockdir,
     logdir => $logdir,
     user => $user,
   }
+  
   File {
     owner => $owner,
     group => $group,
@@ -75,10 +47,10 @@ class nginx (
     ]
   }
   
-  file { $real_docroot:
+  file { $docroot:
     ensure => directory,
   }
-  file { "${real_docroot}/index.html":
+  file { "${docroot}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
