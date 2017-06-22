@@ -1,2 +1,3 @@
 ---
 message: "The message is directly from Ben. Via the ben10512.puppetlabs.vm.yaml file."
+nginx::owner: 'Fred'
