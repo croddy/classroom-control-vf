@@ -10,6 +10,7 @@ class nginx::params {
       $confdir = '/etc/nginx'
       $blockdir = '/etc/nginx/conf.d'
       $logdir = '/var/log/nginx'
+      $service = 'nginx'
       $port = '80'
     }
     'windows': {
@@ -20,6 +21,7 @@ class nginx::params {
       $confdir = 'C:\ProgramData\nsginx'
       $blockdir = 'C:\ProgramData\nginx\conf.d'
       $logdir = 'C:\ProgramData\nginx\logs'
+      $service = 'nginx'
       $port = '80'
     }
     default: {
