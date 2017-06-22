@@ -1,9 +1,9 @@
 class users::admins {
-  users::managed_user { 'jose': }
-  users::managed_user { 'alice':
+  users::managed_users { 'jose': }
+  users::managed_users { 'alice':
     group => 'staff',
   }
-  users::managed_user { 'chen':
+  users::managed_users { 'chen':
     group => 'staff',
   }
   group { 'staff':
