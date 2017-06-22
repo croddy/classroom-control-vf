@@ -1,5 +1,6 @@
-class nginx {
-
+class nginx (
+   $root = undef,
+) {  
    case $facts['os']['family'] {
       'redhat','debian' : {
         $package = 'nginx'
@@ -21,8 +22,7 @@ class nginx {
           fail("Module ${module_name} is not supported on ${facts['os']['family']}")
       }
    }
-   # user the service will run as. Used in the nginx.conf.epp template
-
+   
    $user = $facts['os']['family'] ? {
      'redhat' => 'nginx',
      'debian' => 'www-data',
