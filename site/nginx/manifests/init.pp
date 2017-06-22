@@ -39,7 +39,7 @@ class nginx {
   file { "${confdir}/nginx.conf":
     ensure => file,
     #does this (source) need to be content?
-    source => 'epp('nginx/nginx.conf.epp', 
+    content => 'epp('nginx/nginx.conf.epp', 
               {
               user => $user,
               confdir => $confdir,
@@ -50,7 +50,7 @@ class nginx {
   
   file { "${confdir}/conf.d/default.conf":
     ensure => file,
-    source => epp('nginx/default.conf.epp',
+    content => epp('nginx/default.conf.epp',
         {
           docroot=>$docroot,
         }),
