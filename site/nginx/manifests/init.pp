@@ -1,44 +1,57 @@
 class nginx (
-String $package = $nginx::params::package,
-String $owner = $nginx::params::owner,
-String $group = $nginx::params::group,
-String $docroot = $nginx::params::docroot,
-String $confdir = $nginx::params::confdir,
-String $blockdir = $nginx::params::blockdir,
-String $logdir = $nginx::params::logdir,
-String $user = $nginx::params::user,
-Boolean $highperf = $nginx::params::highperf,
+  $package = $nginx::params::package,
+  $owner = $nginx::params::owner,
+  $group = $nginx::params::group,
+  $docroot = $nginx::params::docroot,
+  $confdir = $nginx::params::confdir,
+  $blockdir = $nginx::params::blockdir,
+  $logdir = $nginx::params::logdir,
+  $service = $nginx::params::service,
+  $user = $nginx::params::user,
 ) inherits nginx::params {
-File {
-owner => $owner,
-group => $group,
-mode => '0664',
-}
-package { $package:
-ensure => present,
-}
-#nginx::vhost { 'default':
-#docroot => $docroot,
-#servername => $facts['fqdn'],
-#}
-file { "${docroot}/vhosts":
-ensure => directory,
-}
-file { "${confdir}/nginx.conf":
-ensure => file,
-content => epp('nginx/nginx.conf.epp',
-{
-user => $user,
-logdir => $logdir,
-confdir => $confdir,
-blockdir => $blockdir,
-highperf => $highperf,
-}),
-require => Package[$package],
-notify => Service['nginx'],
-}
-service { 'nginx':
-ensure => running,
-enable => true,
-}
+  
+  $template_params = {
+    docroot => $docroot,
+    confdir => $confdir,
+    blockdir => $blockdir,
+    logdir => $logdir,
+    user => $user,
+  }
+  
+  File {
+    owner => $owner,
+    group => $group,
+    mode => '0644',
+  }
+  package { $package:
+    ensure => present,
+  }
+  file { 'nginx main config':
+    ensure => file,
+    path => "${confdir}/nginx.conf",
+    content => epp('nginx/nginx.conf.epp', $template_params),
+    require => Package[$package],
+  }
+  file { 'nginx default block':
+    ensure => file,
+    path => "${blockdir}/default.conf",
+    content => epp('nginx/default.conf.epp', $template_params),
+    require => Package[$package],
+  }
+  service { 'nginx':
+    ensure => running,
+    enable => true,
+    subscribe => [ 
+      File['nginx main config'],
+      File['nginx default block'],
+    ]
+  }
+  
+  file { $docroot:
+    ensure => directory,
+  }
+  file { "${docroot}/index.html":
+    ensure => file,
+    source => 'puppet:///modules/nginx/index.html',
+  }
 }
