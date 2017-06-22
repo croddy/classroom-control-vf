@@ -58,6 +58,7 @@ class nginx {
       user => $user,
       confdir => $confdir,
       logdir => $logdir,
+      process => $process,
     }),
     notify => Service['nginx'],
   }
