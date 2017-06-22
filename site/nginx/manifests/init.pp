@@ -55,6 +55,7 @@ class nginx ( $root = undef )
     content => epp('nginx/nginx.conf.epp',
       {
         user => $user,
+        blockdir => $blockdir,
         confdir => $confdir,
         logdir => $logdir,
       }
