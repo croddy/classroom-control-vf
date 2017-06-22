@@ -13,7 +13,7 @@ define user::managed_user(
   file { $homedir:
     ensure => directory,
     owner => $title,
-    group => $primary_group
+    group => $primary_group,
     mode => $mode,
   }
   file { "${homedir}/.ssh":
