@@ -1,30 +1,12 @@
 class nginx(
-  $root=undef,
-){
-  case $facts['os']['family']{
-   'redhat','debian':{
-    $package ='nginx'
-    $owner ='root'
-    $group ='root'
-    $docroot ='/var/www/'
-    $confdir ='/etc/nginx'
-    $logdir ='/var/log/nginx'
-   }
-   'windows':{
-    $package ='nginx-service'
-    $owner ='Administrator'
-    $group ='Administrators'
-    $docroot ='C:/ProgramData/nginx/html'
-    $confdir ='C:/ProgramData/nginx'
-    $logdir ='C:/ProgramData/nginx/logs'
-   }
-   default :{
-    fail("Module ${module_name} is not supported on this different type of system: ${facts['os']['family']}")
-   }
-  }
-
-  $real_docroot = pick($root, $docroot)
-  
+  $package =$nginx::params::package,
+  $owner =$nginx::params::owner,
+  $group =$nginx::params::group,
+  $docroot =$nginx::params::docroot,
+  $confdir =$nginx::params::confdir,
+  $logdir =$nginx::params::logidr,
+ ) inherits=nginx::params {
+   
   #What user the service will run as: 
   $user=$facts['os']['family']?{
     'redhat' => 'nginx',
@@ -56,7 +38,7 @@ class nginx(
     ensure => file,
     content => epp('nginx/default.conf.epp',
         {
-          docroot=>$real_docroot,
+          docroot=>$docroot,
         }),
     notify => Service['nginx'],
     require => Package[$package],
@@ -70,10 +52,10 @@ class nginx(
     ]
   }
   
-  file {[$real_docroot,"${confdir}/conf.d"]:
+  file {[$docroot,"${confdir}/conf.d"]:
     ensure => directory,
   }
-  file { "${real_docroot}/index.html":
+  file { "${docroot}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
