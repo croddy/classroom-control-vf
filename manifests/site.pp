@@ -42,7 +42,3 @@ if $::is_virtual {
   $my_virtual = capitalize ($::virtual)
   notify { "This is a ${my_virtual} system.": }
 }
-
-node default {
-  include nginx
-}
