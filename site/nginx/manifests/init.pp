@@ -1,4 +1,6 @@
-class nginx {
+class nginx (
+  $root = undef,
+) {
   case $osfamily {
     'redhat': {
       $package = 'nginx'
@@ -35,8 +37,10 @@ class nginx {
     }
     default: { fail("Unsupported platform: ${::osfamily}") }
   }
+  $real_docroot = pick($root, $docroot)
+  
   $template_params = {
-    docroot => $docroot,
+    docroot => $real_docroot,
     confdir => $confdir,
     blockdir => $blockdir,
     logdir => $logdir,
@@ -71,10 +75,10 @@ class nginx {
     ]
   }
   
-  file { $docroot:
+  file { $real_docroot:
     ensure => directory,
   }
-  file { "${docroot}/index.html":
+  file { "${real_docroot}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
