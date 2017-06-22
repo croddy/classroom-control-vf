@@ -1,6 +1,7 @@
 define user::managed(
   $homedir = "/home/${title}",
   $primary_group = $title,
+  $mode = "0644",
 ){
   user {$title:
     ensure => present,
