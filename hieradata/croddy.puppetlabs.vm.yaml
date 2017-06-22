@@ -1,2 +1,3 @@
 ---
 message: "This came from Hiera in the file 'croddy.puppetlabs.vm.yaml'."
+nginx::owner: 'alice'
