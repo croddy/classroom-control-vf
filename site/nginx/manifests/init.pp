@@ -8,6 +8,7 @@ class nginx
   $blockdir = $nginx::params::blockdir,
   $logdir = $nginx::params::logdir,
   $user = $nginx::params::user,
+  $seervice = $nginx::params::service,
   $port = $nginx::params::port,
 ) inherits nginx::params
 {
@@ -18,8 +19,6 @@ class nginx
     mode => '0640',
   }
 
-  $service_name = 'nginx'
-  
   $template_params = {
     user => $user,
     blockdir => $blockdir,
@@ -41,14 +40,14 @@ class nginx
   file { "${confdir}/nginx.conf":
     content => epp('nginx/nginx.conf.epp',$template_params),
     require => Package[$package],
-    notify => Service[$service_name],
+    notify => Service[$service],
   }
   file { "${blockdir}/default.conf":
     content => epp('nginx/default.conf.epp',$template_params),
     require => Package[$package],
-    notify => Service[$service_name],
+    notify => Service[$service],
   }
-  service { $service_name:
+  service { $service:
     ensure => running,
     enable => true,
   }
