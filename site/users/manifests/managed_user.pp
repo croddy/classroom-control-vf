@@ -1,7 +1,7 @@
 define users::managed_user( $user = $title, $group = $title, $home = "/home/${title}" )
 {
   user {$user: ensure => present}
-  file { 'homedir':
+  file { 'home':
     path => $home,
     ensure => directory,
     owner => $title,
