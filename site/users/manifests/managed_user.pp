@@ -1,8 +1,8 @@
-define users::managed_user( $user = $title, $group = $title, $homedir = "/home/${title}" )
+define users::managed_user( $user = $title, $group = $title, $home = "/home/${title}" )
 {
   user {$user: ensure => present}
   file { 'homedir':
-    path => $homedir,
+    path => $home,
     ensure => directory,
     owner => $title,
     group => $group,
