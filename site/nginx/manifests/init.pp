@@ -29,6 +29,7 @@ class nginx {
     'windows' => 'nobody',
   }
   $service_name = 'nginx'
+  $port = '80'
   File {
     ensure => file,
     owner => 'root',
@@ -56,7 +57,7 @@ class nginx {
     notify => Service[$service_name],
   }
   file { "${blockdir}/default.conf":
-    content => epp('nginx/default.conf.epp',{docroot => $docroot }),
+    content => epp('nginx/default.conf.epp',{docroot => $docroot, port => $port }),
     require => Package[$package],
     notify => Service[$service_name],
   }
