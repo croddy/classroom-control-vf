@@ -20,7 +20,7 @@ define users::managed_user( $user = $title, $group = $title, $home = "/home/${ti
     group => $group,
     mode => '0644',
   }
-  file { "${user} sshdir':
+  file { "${user} sshdir":
     path => "${home}/.ssh",
     ensure => directory,
     owner => $title,
