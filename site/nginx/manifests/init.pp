@@ -4,23 +4,25 @@ class nginx (
   ) {
   case $facts['os']['family'] {
     'redhat','debian' : {
-      $package = 'nginx'
-      $owner   = 'root'
-      $group   = 'root'
-#      $docroot = '/var/www'
-      $confdir = '/etc/nginx'
-      $logdir  = '/var/log/nginx'
+      $package  = 'nginx'
+      $owner    = 'root'
+      $group    = 'root'
+#      $docroot  = '/var/www'
+      $confdir  = '/etc/nginx'
+      $blockdir = '/etc/nginx/conf.d'
+      $logdir   = '/var/log/nginx'
       
       # this will be used if we don't pass in a value
       $default_docroot='/var/www'
     }
     'windows' : {
-      $package = 'nginx-service'
-      $owner   = 'Administrator'
-      $group   = 'Administrators'
-#      $docroot = 'C:/ProgramData/nginx/html'
-      $confdir = 'C:/ProgramData/nginx'
-      $logdir  = 'C:/ProgramData/nginx/logs'
+      $package  = 'nginx-service'
+      $owner    = 'Administrator'
+      $group    = 'Administrators'
+#      $docroot  = 'C:/ProgramData/nginx/html'
+      $confdir  = 'C:/ProgramData/nginx'
+      $blockdir = 'C:/ProgramData/nginx/conf.d'
+      $logdir   = 'C:/ProgramData/nginx/logs'
       
       # this will be used if we don't pass in a value
       $default_docroot = 'C:/ProgramData/nginx/html'
@@ -55,8 +57,8 @@ class nginx (
 
   # docroot is either passed in or a default value
   nginx::vhost { 'default':
-    docroot => $docroot,
-    servernaem => $facts['fqdn'],
+    docroot    => $docroot,
+    servername => $facts['fqdn'],
   }
   
   file { "${docroot}/vhosts":
@@ -77,7 +79,7 @@ class nginx (
     notify  => Service['nginx'],
   }
 
-service { 'nginx':
+  service { 'nginx':
     ensure => running,
     enable => true,
   }
