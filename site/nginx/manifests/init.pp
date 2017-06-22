@@ -33,6 +33,7 @@ class nginx {
       $service = 'nginx'
       $user = 'nobody'
     }
+    default: { fail("Unsupported platform: ${::osfamily}") }
   }
   $template_params = {
     docroot => $docroot,
