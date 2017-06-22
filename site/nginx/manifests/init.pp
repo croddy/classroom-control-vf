@@ -12,7 +12,7 @@ $confdir = '/etc/nginx'
 $blockdir = '/etc/nginx/conf.d'
 $logdir = '/var/log/nginx'
 # this will be used if we don't pass in a value
-$default_docroot = '/var/www'
+#$default_docroot = '/var/www'
 }
 'windows' : {
 $package = 'nginx-service'
@@ -50,10 +50,10 @@ package { $package:
 ensure => present,
 }
 # docroot is either passed in or a default value
-nginx::vhost { 'default':
-docroot => $docroot,
-servername => $facts['fqdn'],
-}
+#nginx::vhost { 'default':
+#docroot => $docroot,
+#servername => $facts['fqdn'],
+#}
 file { "${docroot}/vhosts":
 ensure => directory,
 }
