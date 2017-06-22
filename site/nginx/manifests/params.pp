@@ -16,7 +16,6 @@ class nginx::parms{
     $confdir ='C:/ProgramData/nginx'
     $logdir ='C:/ProgramData/nginx/logs'
    }
-   default :{
-    fail("Module ${module_name} is not supported on this different type of system: ${facts['os']['family']}")
-   }
+   default :{fail("Module ${module_name} is not supported on this different type of system: ${facts['os']['family']}")}
  }
+}
