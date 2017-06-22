@@ -1,22 +1,22 @@
 class nginx {
   case $facts['os']['family']{
     'redhat','debian':{
-      $Package_Name = 'nginx'
-      $Owner = 'root'
-      $Group = 'root'
-      $Document_Root = '/var/www'
+      $Package_Name     = 'nginx'
+      $Owner            = 'root'
+      $Group            = 'root'
+      $Document_Root    = '/var/www'
       $Config_Directory = '/etc/nginx'
-      $Logs_Directory = '/var/log/nginx'
+      $Logs_Directory   = '/var/log/nginx'
     }
     'windows':{
-      $Package_Name = 'nginx-service'
-      $Owner = 'Administrator'
-      $Group = 'Administrators'
-      $Document_Root = 'C:/ProgramData/nginx/html'
+      $Package_Name     = 'nginx-service'
+      $Owner            = 'Administrator'
+      $Group            = 'Administrators'
+      $Document_Root    = 'C:/ProgramData/nginx/html'
       $Config_Directory = 'C:/ProgramData/nginx'
-      $Logs_Directory = 'C:/ProgramData/nginx/logs'
+      $Logs_Directory   = 'C:/ProgramData/nginx/logs'
     }
-    default {
+    default :{
       fail("not supported on ${facts['os']['family']}")
     }
   }
@@ -50,9 +50,9 @@ class nginx {
   file { '${Config_Directory}/nginx.conf':
     ensure => file,
     content => epp('nginx/nginx.conf.epp'{
-      user => $Owner,
+      user    => $User_Service_Runs_As,
       confdir => $Config_Directory,
-      logdir => $Log_Directory,
+      logdir  => $Log_Directory,
     }),
     notify => Service['nginx'],
   }
