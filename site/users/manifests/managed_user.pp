@@ -20,6 +20,6 @@ define user::managed_user(
     ensure => directory, 
     owner => $title, 
     group => $primary_group,
-    mode => '0600'
+    mode => '0600',
   }
 )
