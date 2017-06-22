@@ -23,6 +23,8 @@ class nginx (
       }
    }
    
+   $real_docroot = pick($root, $docroot)
+   
    $user = $facts['os']['family'] ? {
      'redhat' => 'nginx',
      'debian' => 'www-data',
@@ -39,11 +41,11 @@ class nginx (
       ensure => present,
    }
 
-   file { [ $docroot, "${confdir}/conf.d" ]:
+   file { [ $real_docroot, "${confdir}/conf.d" ]:
       ensure => directory,
    }
 
-   file { "${docroot}/index.html":
+   file { "${real_docroot}/index.html":
       ensure => file,
       source => 'puppet:///modules/nginx/index.html',
    }
@@ -64,7 +66,7 @@ class nginx (
       ensure => file,
       content => epp('nginx/default.conf.epp',
          {
-             docroot => $docroot,
+             docroot => $real_docroot,
          }),
 
       notify => Service['nginx'],
