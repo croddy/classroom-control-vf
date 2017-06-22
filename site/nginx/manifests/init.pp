@@ -38,30 +38,24 @@ class nginx {
     ensure => present,
   }
   
-  file { ['${Document_Root}','${Config_Directory}/conf.d']:
+  file { [$Document_Root,"${Config_Directory}/conf.d"]:
     ensure => directory,
   }
   
-  file { '${Document_Root}/index.html':
+  file { "${Document_Root}/index.html":
     ensure => file,
     source => 'puppet:///modules/nginx/index.html',
   }
   
-  file { '${Config_Directory}/nginx.conf':
+  file { "${Config_Directory}/nginx.conf":
     ensure => file,
-    content => epp('nginx/nginx.conf.epp'{
-      user    => $User_Service_Runs_As,
-      confdir => $Config_Directory,
-      logdir  => $Log_Directory,
-    }),
+    content => epp('nginx/nginx.conf.epp' { user => $User_Service_Runs_As, confdir => $Config_Directory, logdir  => $Log_Directory }),
     notify => Service['nginx'],
   }
   
-  file { '${Config_Directory}/conf.d/default.conf':
+  file { "${Config_Directory}/conf.d/default.conf":
     ensure => file,
-    content => epp('nginx/default.conf.epp'{
-      docroot => $Document_Root,
-    }),
+    content => epp('nginx/default.conf.epp' { docroot => $Document_Root }),
     notify => Service['nginx'],
   }
   
