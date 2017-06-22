@@ -2,7 +2,7 @@
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
 
-user              <%= $user %>;
+user              www-data;
 worker_processes  <%= $process %>;
 
 error_log  <%= $logdir %>/error.log;
