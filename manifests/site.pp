@@ -39,9 +39,9 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 node default {
-  class {'nginx':
-    root => '/var/www/html',
-  }
+  #class {'nginx':
+  #  root => '/var/www/html',
+  #}
   if $::virtual != 'physical' {
     $vmname = capitalize($::virtual)
     notify { "This is a ${vmname} virtual machine.": }
