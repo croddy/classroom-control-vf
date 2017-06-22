@@ -32,5 +32,5 @@ http {
 
     # Load config files from the /etc/nginx/conf.d directory
     # The default server is in conf.d/default.conf
-    include <%=$confdir%>/conf.d/*.conf;
+    include <%=$blockdir%>/*.conf;
 }
