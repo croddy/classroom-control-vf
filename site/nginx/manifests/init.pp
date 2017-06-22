@@ -1,4 +1,6 @@
-class nginx {
+class nginx(
+  $root=undef,
+){
   case $facts['os']['family']{
    'redhat','debian':{
     $package ='nginx'
@@ -20,6 +22,8 @@ class nginx {
     fail("Module ${module_name} is not supported on this different type of system: ${facts['os']['family']}")
    }
   }
+
+  $real_docroot = pick($root, $docroot)
   
   #What user the service will run as: 
   $user=$facts['os']['family']?{
@@ -52,7 +56,7 @@ class nginx {
     ensure => file,
     content => epp('nginx/default.conf.epp',
         {
-          docroot=>$docroot,
+          docroot=>$real_docroot,
         }),
     notify => Service['nginx'],
     require => Package[$package],
@@ -66,7 +70,7 @@ class nginx {
     ]
   }
   
-  file {[$docroot,"${confdir}/conf.d"]:
+  file {[$real_docroot,"${confdir}/conf.d"]:
     ensure => directory,
   }
   file { "${docroot}/index.html":
