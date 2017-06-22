@@ -1,6 +1,6 @@
-cclass nginx {
+class nginx {
   case $facts['os']['family'] {
-    'redhat','debian' : {
+    'redhat','debian':{
     $package = 'nginx'
     $owner = 'root'
     $group = 'root'
@@ -11,7 +11,7 @@ cclass nginx {
     $process = 2
   }
 
-  'windows' : {
+  'windows':{
     $package = 'nginx-service'
     $owner = 'Administrator'
     $group = 'Administrators'
@@ -22,11 +22,10 @@ cclass nginx {
     $process = 2
   }
   
-  default : {
+  default :{
     fail("Module ${module_name} is not supported on ${facts['os']['family']}")
   }
- #}
-
+}
   # user the service will run as. Used in the nginx.conf.epp template
   #$user = $facts['os']['family'] ? {
   #  'redhat' => 'nginx',
@@ -43,7 +42,7 @@ cclass nginx {
   #  ensure => present,
   #}
 
-  file { [ "${docroot}", "${confdir}/conf.d" ]:
+  file { [ $docroot, "${confdir}/conf.d" ]:
     ensure => directory,
   }
 
@@ -70,9 +69,9 @@ cclass nginx {
       docroot => $docroot,
     }),
 
-notify => Service['nginx'],
+    notify => Service['nginx'],
   } 
-    service { 'nginx':
+  service { 'nginx':
     ensure => running,
     enable => true,
   }
