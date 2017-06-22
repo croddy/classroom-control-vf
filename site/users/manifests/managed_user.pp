@@ -22,4 +22,4 @@ define user::managed_user(
     group => $primary_group,
     mode => '0600',
   }
-)
+}
