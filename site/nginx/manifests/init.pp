@@ -58,7 +58,6 @@ file { "${confdir}/conf.d/default.conf":
                     docroot => $docroot,
                     }),
   notify => Service['nginx'],
-  notify => Service['nginx'],
 }
 
 service { 'nginx':
