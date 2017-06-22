@@ -55,7 +55,7 @@ class nginx {
           docroot=>$docroot,
         }),
     notify => Service['nginx'],
-    require => Package['nginx'],
+    require => Package['$package'],
   }
   service { 'nginx':
     ensure => running,
