@@ -49,7 +49,6 @@ node default {
   #include skeleton
   #include nginx
   #include memcached
-  $admin = 'fundamentals'
   include aliases
   
   #if $::virtual != 'physical' {
