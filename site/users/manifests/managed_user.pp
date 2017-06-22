@@ -1,13 +1,15 @@
 define users::managed_user( $user = $title, $group = $title, $homedir = "/home/${title}" )
 {
   user {$user: ensure => present}
-  file {j$homedir:
+  file { 'homedir':
+    path => $homedir,
     ensure => directory,
     owner => $title,
     group => $group,
   }
   file { 'bashrc':
     path => "${homedir}/.bashrc",
+    ensure => file,
     owner => $user,
     group => $group,
     mode => '0644',
