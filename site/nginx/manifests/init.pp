@@ -30,4 +30,6 @@ service { 'nginx':
 ensure => running,
 enable => true,
 }
+$default_docroot='/var/wwww'
+
 }
