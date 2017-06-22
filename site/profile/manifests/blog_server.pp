@@ -29,5 +29,7 @@ class profile::blog_server {
   class { 'wordpress':
     create_db_user => false,
     db_name => 'wordpress',
+    db_user => 'wordpress',
+    db_password => 'pass1234', # note: should be in hiera-eyaml like the other one!
   }   
 }
