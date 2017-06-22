@@ -55,7 +55,7 @@ class nginx (
 
   # docroot is either passed in or a default value
   nginx::vhost { 'default':
-    docroot => $docroot,
+    # docroot => $docroot,
     servernaem => $facts'[fqdn'],
   }
   
