@@ -1,10 +1,12 @@
 class nginx ( $root = undef )
 {
   File {
+    ensure => file,
     owner => 'root',
     group => 'root',
-    mode => '0440'
+    mode => '0640',
   }
+  
   $osfamily = $facts['os']['family']
   case $osfamily {
     'redhat','debian': {
@@ -36,14 +38,10 @@ class nginx ( $root = undef )
     undef => $default_docroot,
     default => $root,
   }
+  
   $service_name = 'nginx'
   $port = '80'
-  File {
-    ensure => file,
-    owner => 'root',
-    group => 'root',
-    mode => '0644',
-  }
+  
   package { $package:
     ensure => present,
   }  
