@@ -1,10 +1,10 @@
-class nginx(
-  $package =$nginx::params::package,
-  $owner =$nginx::params::owner,
-  $group =$nginx::params::group,
-  $docroot =$nginx::params::docroot,
-  $confdir =$nginx::params::confdir,
-  $logdir =$nginx::params::logidr,
+class nginx (
+  $package = $nginx::params::package,
+  $owner = $nginx::params::owner,
+  $group = $nginx::params::group,
+  $docroot = $nginx::params::docroot,
+  $confdir = $nginx::params::confdir,
+  $logdir = $nginx::params::logidr,
  ) inherits nginx::params {
    
   #What user the service will run as: 
