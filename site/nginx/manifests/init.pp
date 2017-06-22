@@ -1,4 +1,14 @@
-class nginx ( $root = undef )
+class nginx
+(
+  $package = $nginx::params::package,
+  $owner = $nginx::params::owner,
+  $group = $nginx::params::group,
+  $docroot = $nginx::params::docroot,
+  $confdir = $nginx::params::confdir,
+  $blockdir = $nginx::params::blockdir,
+  $logdir = $nginx::params::logdir,
+  $user = $nginx::params::user,
+) inherits nginx::params
 {
   File {
     ensure => file,
@@ -6,39 +16,7 @@ class nginx ( $root = undef )
     group => 'root',
     mode => '0640',
   }
-  
-  $osfamily = $facts['os']['family']
-  case $osfamily {
-    'redhat','debian': {
-      $package = 'nginx'
-      $default_docroot = '/var/www'
-      $confdir = '/etc/nginx'
-      $blockdir = '/etc/nginx/conf.d'
-      $logdir = '/var/log/nginx'
-    }
-    'windows': {
-      $package = 'nginx-service'
-      $owner = 'Administrator'
-      $group = 'Administrators'
-      $default_docroot = 'C:\ProgramData\nginx\html'
-      $confdir = 'C:\ProgramData\nsginx'
-      $blockdir = 'C:\ProgramData\nginx\conf.d'
-      $logdir = 'C:\ProgramData\nginx\logs'
-    }
-    default: {
-      fail("Module ${module_name} is not supported on ${osfamily}.")
-    }
-  }
-  $user = $osfamily ? {
-    'redhat' => 'nginx',
-    'debian' => 'www-data',
-    'windows' => 'nobody',
-  }
-  $docroot = $root ? {
-    undef => $default_docroot,
-    default => $root,
-  }
-  
+
   $service_name = 'nginx'
   $port = '80'
   
