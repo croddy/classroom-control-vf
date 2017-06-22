@@ -19,9 +19,13 @@ class nginx (
     ensure => present,
   }
 
-  nginx::vhost { 'default':
-    docroot => $docroot,
-    servername => $facts['fqdn'],
+  #nginx::vhost { 'default':
+  #  docroot => $docroot,
+  #  servername => $facts['fqdn'],
+  #}
+
+  file { "${docroot}":
+    ensure => directory,
   }
 
   file { "${docroot}/vhosts":
