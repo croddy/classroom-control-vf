@@ -44,13 +44,6 @@ node default {
 # Example:
 # class { 'my_class': }
 
-  class { 'nginx':
-    root => '/var/www/html',
-  }
-  if $::virtual != 'physical' {
-    $vmname = capitalize($::virtual)
-    notify { "This is a ${vmname} virtual machine.": }
-  }
   include nginx
 }
 
