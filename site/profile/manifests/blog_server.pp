@@ -17,6 +17,9 @@ class profile::blog_server {
       },
     },
   }
+  class { 'mysql::bindings':
+    php_enable => true,
+  }
   
   class { 'apache':
     docroot => '/opt/wordpress',
