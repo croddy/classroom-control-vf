@@ -1,9 +1,12 @@
 class users::admins {
   users::managed_user { 'jose': }
   users::managed_user { 'alice':
-    primary_group => 'wheel',
+    group => 'staff',
   }
   users::managed_user { 'chen':
-    mode => '0600',
+    group => 'staff',
+  }
+  group {'staff':
+    ensure => present,
   }
 }
