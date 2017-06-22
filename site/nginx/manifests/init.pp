@@ -1,11 +1,15 @@
-class nginx {
+class nginx ( String $root = undef, Boolean $highperf = true )
+{
+  File {
+    owner => 'root',
+    group => 'root',
+    mode => '0440'
+  }
   $osfamily = $facts['os']['family']
   case $osfamily {
     'redhat','debian': {
       $package = 'nginx'
-      $owner = 'root'
-      $group = 'root'
-      $docroot = '/var/www'
+      #$docroot = '/var/www'
       $confdir = '/etc/nginx'
       $blockdir = '/etc/nginx/conf.d'
       $logdir = '/var/log/nginx'
@@ -14,7 +18,7 @@ class nginx {
       $package = 'nginx-service'
       $owner = 'Administrator'
       $group = 'Administrators'
-      $docroot = 'C:\ProgramData\nginx\html'
+      #$docroot = 'C:\ProgramData\nginx\html'
       $confdir = 'C:\ProgramData\nsginx'
       $blockdir = 'C:\ProgramData\nginx\conf.d'
       $logdir = 'C:\ProgramData\nginx\logs'
@@ -27,6 +31,10 @@ class nginx {
     'redhat' => 'nginx',
     'debian' => 'www-data',
     'windows' => 'nobody',
+  }
+  $docroot = $root ? {
+    undef => $default_docroot,
+    default => $root,
   }
   $service_name = 'nginx'
   $port = '80'
