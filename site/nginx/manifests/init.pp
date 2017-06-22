@@ -54,14 +54,14 @@ notify => Service['nginx'],
 file { "${confdir}/conf.d/default.conf":
   ensure => file,
   content => epp('nginx/default.conf.epp',
-{
-docroot => $docroot,
-}),
+                    {
+                    docroot => $docroot,
+                    }),
   notify => Service['nginx'],
   notify => Service['nginx'],
 }
 
-  service { 'nginx':
+service { 'nginx':
   ensure => running,
   enable => true,
 }
