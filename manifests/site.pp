@@ -44,7 +44,6 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 include memcached
-include docroot
 
 if $::virtual != 'physical' {
 $vmname = capitalize($::virtual)
