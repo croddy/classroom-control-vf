@@ -8,6 +8,7 @@ class nginx
   $blockdir = $nginx::params::blockdir,
   $logdir = $nginx::params::logdir,
   $user = $nginx::params::user,
+  $port = $nginx::params::port,
 ) inherits nginx::params
 {
   File {
@@ -25,7 +26,7 @@ class nginx
     confdir => $confdir,
     docroot => $docroot,
     logdir => $logdir,
-    port => '80',
+    port => $port,
   }
 
   package { $package:
