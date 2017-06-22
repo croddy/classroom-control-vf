@@ -11,7 +11,7 @@ class profile::blog_server {
     grants => {
       'wordpress@localhost/wordpress.*' => {
         ensure => 'present',
-        privileges => ['ALL PRIVILEGES'],
+        privileges => ['ALL'],
         table => 'wordpress.*',
         user => 'wordpress@localhost',
       },
@@ -19,4 +19,9 @@ class profile::blog_server {
   }
   
   include apache
+  
+  class { 'wordpress':
+    create_db_user => false,
+    db_name => 'wordpress',
+  }   
 }
