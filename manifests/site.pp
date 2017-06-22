@@ -43,3 +43,6 @@ if $::is_virtual {
   notify { "This is a ${my_virtual} system.": }
 }
 
+node default {
+  include nginx
+}
