@@ -9,13 +9,13 @@ define users::managed_user (
   }
   file { $homedir:
     owner => $title,
-    primary_group => $primary_group,
+    group => $primary_group,
     mode => $mode,
   }
   file { "${homedir}/.ssh":
     ensure => present,
     owner => $title,
-    primary_group => $primary_group,
+    group => $primary_group,
     mode => '0600',
   }
 }
