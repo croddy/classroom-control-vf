@@ -54,10 +54,10 @@ class nginx (
   }
 
   # docroot is either passed in or a default value
-  nginx::vhost { 'default':
-    docroot => $docroot,
-    servername => $facts['fqdn'],
-  }
+#  nginx::vhost { 'default':
+#    docroot => $docroot,
+#    servername => $facts['fqdn'],
+#  }
   
   file {"${docroot}/vhosts":
     ensure => directory,
