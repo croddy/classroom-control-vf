@@ -1,20 +1,20 @@
 class nginx {
   case $facts['os']['family']{
     'redhat','debian':{
-      $Package_Name           = 'nginx'
-      $Owner                  = 'root'
-      $Group                  = 'root'
-      $Document_Root          = '/var/www'
-      $Config_Directory       = '/etc/nginx'
-      $Logs_Directory         = '/var/log/nginx'
+      $Package_Name = 'nginx'
+      $Owner = 'root'
+      $Group = 'root'
+      $Document_Root = '/var/www'
+      $Config_Directory = '/etc/nginx'
+      $Logs_Directory = '/var/log/nginx'
     }
     'windows':{
-      $Package_Name           = 'nginx-service'
-      $Owner                  = 'Administrator'
-      $Group                  = 'Administrators'
-      $Document_Root          = 'C:/ProgramData/nginx/html'
-      $Config_Directory       = 'C:/ProgramData/nginx'
-      $Logs_Directory         = 'C:/ProgramData/nginx/logs'
+      $Package_Name = 'nginx-service'
+      $Owner = 'Administrator'
+      $Group = 'Administrators'
+      $Document_Root = 'C:/ProgramData/nginx/html'
+      $Config_Directory = 'C:/ProgramData/nginx'
+      $Logs_Directory = 'C:/ProgramData/nginx/logs'
     }
     default {
       fail("not supported on ${facts['os']['family']}")
@@ -23,8 +23,8 @@ class nginx {
   
   # user the service will run as. Used in the nginx.conf.epp template
   $User_Service_Runs_As = $facts['os']['family'] ? {
-    'redhat'  => 'nginx',
-    'debian'  => 'www-data',
+    'redhat' => 'nginx',
+    'debian' => 'www-data',
     'windows' => 'nobody',
   }
   
