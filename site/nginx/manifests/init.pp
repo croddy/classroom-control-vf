@@ -5,7 +5,7 @@ class nginx(
   $docroot =$nginx::params::docroot,
   $confdir =$nginx::params::confdir,
   $logdir =$nginx::params::logidr,
- ) inherits=nginx::params {
+ ) inherits nginx::params {
    
   #What user the service will run as: 
   $user=$facts['os']['family']?{
