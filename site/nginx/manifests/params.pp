@@ -10,6 +10,7 @@ class nginx::params {
       $confdir = '/etc/nginx'
       $blockdir = '/etc/nginx/conf.d'
       $logdir = '/var/log/nginx'
+      $port = '80'
     }
     'windows': {
       $package = 'nginx-service'
@@ -19,6 +20,7 @@ class nginx::params {
       $confdir = 'C:\ProgramData\nsginx'
       $blockdir = 'C:\ProgramData\nginx\conf.d'
       $logdir = 'C:\ProgramData\nginx\logs'
+      $port = '80'
     }
     default: {
       fail("Module ${module_name} is not supported on ${osfamily}.")
