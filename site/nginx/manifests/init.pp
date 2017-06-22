@@ -68,6 +68,7 @@ class nginx {
     content => epp('nginx/default.conf.epp',
     {
       docroot => $docroot,
+      port => $port,
     }),
 
     notify => Service['nginx'],
