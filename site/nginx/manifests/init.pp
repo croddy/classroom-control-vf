@@ -6,7 +6,7 @@ class nginx {
       $Logs_Directory         = '/var/log/nginx'
       $User_Service_Runs_As   = 'nginx'
     }
-    'Windows':
+    'Windows': {
       $Document_Root          = 'C:/ProgramData/nginx/html'
       $Config_Directory       = 'C:/ProgramData/nginx'
       $Logs_Directory         = 'C:/ProgramData/nginx/logs'
