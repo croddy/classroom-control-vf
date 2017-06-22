@@ -38,7 +38,7 @@ class nginx {
     group => $group,
     mode => '0664',
   #}
-    package => $package:
+    package => $package,
     ensure => present,
   }
 
