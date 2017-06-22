@@ -1,4 +1,5 @@
 class profile::blog_server {
+
   class { 'mysql::server':
     root_password => 'strong_password1', # note: not a very strong password
     users => {
@@ -16,4 +17,6 @@ class profile::blog_server {
       },
     },
   }
+  
+  include apache
 }
