@@ -60,7 +60,11 @@ class nginx (
 #    docroot    => $docroot,
 #    servername => $facts['fqdn'],
 #  }
-  
+
+  file { "${docroot}":
+    ensure => directory,
+  }
+
   file { "${docroot}/vhosts":
     ensure => directory,
   }
