@@ -7,6 +7,7 @@ class nginx {
       $group = 'root'
       $docroot = '/var/www'
       $confdir = '/etc/nginx'
+      $blockdir = '/etc/nginx/conf.d'
       $logdir = '/var/log/nginx'
     }
     'windows': {
@@ -15,6 +16,7 @@ class nginx {
       $group = 'Administrators'
       $docroot = 'C:\ProgramData\nginx\html'
       $confdir = 'C:\ProgramData\nsginx'
+      $blockdir = 'C:\ProgramData\nginx\conf.d'
       $logdir = 'C:\ProgramData\nginx\logs'
     }
     default: {
@@ -36,7 +38,7 @@ class nginx {
   package { $package:
     ensure => present,
   }  
-  file { [$docroot,"${confdir}/conf.d"]:
+  file { [$docroot,$blockdir]:
     ensure => directory,
   }
   file { "${docroot}/index.html":
@@ -53,7 +55,7 @@ class nginx {
     require => Package[$package],
     notify => Service[$service_name],
   }
-  file { "${confdir}/conf.d/default.conf":
+  file { "${blockdir}/default.conf":
     content => epp('nginx/default.conf.epp',{docroot => $docroot }),
     require => Package[$package],
     notify => Service[$service_name],
