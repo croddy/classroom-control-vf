@@ -1,169 +1,44 @@
 class nginx (
-
-  $root = undef,
-
-) {
-
-  case $osfamily {
-
-    'redhat': {
-
-      $package = 'nginx'
-
-      $owner = 'root'
-
-      $group = 'root'
-
-      $docroot = '/var/www'
-
-      $confdir = '/etc/nginx'
-
-      $blockdir = '/etc/nginx/conf.d'
-
-      $logdir = '/var/log/nginx'
-
-      $service = 'nginx'
-
-      $user = 'nginx'
-
-    }
-
-    'debian': {
-
-      $package = 'nginx'
-
-      $owner = 'root'
-
-      $group = 'root'
-
-      $docroot = '/var/www'
-
-      $confdir = '/etc/nginx'
-
-      $blockdir = '/etc/nginx/conf.d'
-
-      $logdir = '/var/log/nginx'
-
-      $service = 'nginx'
-
-      $user = 'www-data'
-
-    }
-
-    'windows': {
-
-      $package = 'nginx-service'
-
-      $owner = 'Administrator'
-
-      $group = 'Administrators'
-
-      $docroot = 'C:/ProgramData/nginx/html'
-
-      $confdir = 'C:/ProgramData/nginx'
-
-      $blockdir = 'C:/ProgramData/nginx/conf.d'
-
-      $logdir = 'C:/ProgramData/nginx/logs'
-
-      $service = 'nginx'
-
-      $user = 'nobody'
-
-    }
-
-    default: { fail("Unsupported platform: ${::osfamily}") }
-
-  }
-
-  $real_docroot = pick($root, $docroot)
-
-  
-
-  $template_params = {
-
-    docroot => $real_docroot,
-
-    confdir => $confdir,
-
-    blockdir => $blockdir,
-
-    logdir => $logdir,
-
-    user => $user,
-
-  }
-
+  String $package = $nginx::params::package,
+  String $owner = $nginx::params::owner,
+  String $group = $nginx::params::group,
+  String $docroot = $nginx::params::docroot,
+  String $confdir = $nginx::params::confdir,
+  String $blockdir = $nginx::params::blockdir,
+  String $logdir = $nginx::params::logdir,
+  String $user = $nginx::params::user,
+  Boolean $highperf = $nginx::params::highperf,
+) inherits nginx::params {
   File {
-
     owner => $owner,
-
     group => $group,
-
-    mode => '0644',
-
+    mode => '0664',
   }
-
   package { $package:
-
     ensure => present,
-
   }
-
-  file { 'nginx main config':
-
-    ensure => file,
-
-    path => "${confdir}/nginx.conf",
-
-    content => epp('nginx/nginx.conf.epp', $template_params),
-
-    require => Package[$package],
-
+  nginx::vhost { 'default':
+    docroot => $docroot,
+    servername => $facts['fqdn'],
   }
-
-  file { 'nginx default block':
-
-    ensure => file,
-
-    path => "${blockdir}/default.conf",
-
-    content => epp('nginx/default.conf.epp', $template_params),
-
-    require => Package[$package],
-
-  }
-
-  service { 'nginx':
-
-    ensure => running,
-
-    enable => true,
-
-    subscribe => [ 
-
-      File['nginx main config'],
-
-      File['nginx default block'],
-
-    ]
-
-  }
-
-  
-
-  file { $real_docroot:
-
+  file { "${docroot}/vhosts":
     ensure => directory,
-
   }
-
-  file { "${real_docroot}/index.html":
-
+  file { "${confdir}/nginx.conf":
     ensure => file,
-
-    source => 'puppet:///modules/nginx/index.html',
-
-  }
-
+    content => epp('nginx/nginx.conf.epp',
+            {
+              user => $user,
+              logdir => $logdir,
+              confdir => $confdir,
+              blockdir => $blockdir,
+              highperf => $highperf,
+            }),
+    require => Package[$package],
+    notify => Service['nginx'],
+   }
+  service { 'nginx':
+    ensure => running,
+    enable => true,
+   }
 }
