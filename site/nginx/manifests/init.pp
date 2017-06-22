@@ -45,7 +45,7 @@ class nginx {
               confdir => $confdir,
               logdir => $logdir,
               }),
-    require => Package['$package'],
+    require => Package[$package],
   }
   
   file { "${confdir}/conf.d/default.conf":
@@ -55,7 +55,7 @@ class nginx {
           docroot=>$docroot,
         }),
     notify => Service['nginx'],
-    require => Package['$package'],
+    require => Package[$package],
   }
   service { 'nginx':
     ensure => running,
