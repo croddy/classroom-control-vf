@@ -59,7 +59,7 @@ class nginx (
     servername => $facts['fqdn'],
   }
   
-  file { ${docroot}/vhosts":
+  file {"${docroot}/vhosts":
     ensure => directory,
   }
 
