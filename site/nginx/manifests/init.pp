@@ -27,20 +27,20 @@ class nginx {
   }
 }
   # user the service will run as. Used in the nginx.conf.epp template
-  #$user = $facts['os']['family'] ? {
-  #  'redhat' => 'nginx',
-  #  'debian' => 'www-data',
-  #  'windows' => 'nobody',
-  #}
+  $user = $facts['os']['family'] ? {
+    'redhat' => 'nginx',
+    'debian' => 'www-data',
+    'windows' => 'nobody',
+  }
 
-  #file {
-  #  owner => $owner,
-  #  group => $group,
-  #  mode => '0664',
-  ##}
-  #  package => $package:
-  #  ensure => present,
-  #}
+  file {
+    owner => $owner,
+    group => $group,
+    mode => '0664',
+  }
+    package => $package:
+    ensure => present,
+  }
 
   file { [ $docroot, "${confdir}/conf.d" ]:
     ensure => directory,
